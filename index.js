@@ -16,6 +16,8 @@ connection.query("SHOW TABLES", (err, results) => {
   }
 
   console.log("Tables in my_app:", results);
+  console.log(results[0]);
+  console.log(results[1]);
   connection.end();
 });
 
