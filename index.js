@@ -2,6 +2,10 @@ const { faker } = require("@faker-js/faker");
 const mysql = require("mysql2");
 const express = require("express");
 const app = express();
+const path = require("path");
+
+app.set("view Engine", "ejs");
+app.use("view", path.join(__dirname, "views"));
 let port = 8080;
 
 const connection = mysql.createConnection({
@@ -21,7 +25,17 @@ let getRandomUser = () => {
 };
 
 app.get("/", (req, res) => {
-  res.send("welcome to home page");
+  let q = `SELECT count(*) FROM user;`;
+  try {
+    connection.query(q, (err, result) => {
+      if (err) throw err;
+      console.log(result[0]["count(*)"]);
+      res.send(result);
+    });
+  } catch (err) {
+    console.log(err);
+    res.send("Some error in DB");
+  }
 });
 app.listen(port, () => {
   console.log("server is lestening to port 8080");
