@@ -1,5 +1,8 @@
 const { faker } = require("@faker-js/faker");
 const mysql = require("mysql2");
+const express = require("express");
+const app = express();
+let port = 8080;
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -17,20 +20,21 @@ let getRandomUser = () => {
   ];
 };
 
-let q = "INSERT INTO user (id,username,email,password) VALUES ?";
-let data = [];
-for (let i = 1; i <= 100; i++) {
-  data.push(getRandomUser());
-}
-
-connection.query(q, [data], (err, results) => {
-  if (err) {
-    console.error("Database Error:", err.message);
-    connection.end();
-    return;
-  }
-
-  console.log("Tables in my_app:", results);
-  console.log(results);
-  connection.end();
+app.get("/", (req, res) => {
+  res.send("welcome to home page");
 });
+app.listen(port, () => {
+  console.log("server is lestening to port 8080");
+});
+
+// connection.query(q, [data], (err, results) => {
+//   if (err) {
+//     console.error("Database Error:", err.message);
+//     connection.end();
+//     return;
+//   }
+
+//   console.log("Tables in my_app:", results);
+//   console.log(results);
+//   connection.end();
+// });
