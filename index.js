@@ -4,8 +4,8 @@ const express = require("express");
 const app = express();
 const path = require("path");
 
-app.set("view Engine", "ejs");
-app.use("view", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+app.set("view", path.join(__dirname, "/views"));
 let port = 8080;
 
 const connection = mysql.createConnection({
