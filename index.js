@@ -29,7 +29,8 @@ app.get("/", (req, res) => {
   try {
     connection.query(q, (err, result) => {
       if (err) throw err;
-      res.render("home.ejs");
+      let countValue = result[0]["count(*)"];
+      res.render("home.ejs", { countValue });
     });
   } catch (err) {
     console.log(err);
