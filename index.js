@@ -23,6 +23,7 @@ let getRandomUser = () => {
     faker.internet.password(),
   ];
 };
+//HOME Route
 
 app.get("/", (req, res) => {
   let q = `SELECT count(*) FROM user;`;
@@ -39,6 +40,12 @@ app.get("/", (req, res) => {
 });
 app.listen(port, () => {
   console.log("server is lestening to port 8080");
+});
+
+//USER ROUTE
+
+app.get("/user", (req, res) => {
+  res.send("this a user section");
 });
 
 // connection.query(q, [data], (err, results) => {
