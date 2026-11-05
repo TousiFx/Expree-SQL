@@ -47,24 +47,18 @@ app.listen(port, () => {
 app.get("/user", (req, res) => {
   let q = `SELECT * FROM user`;
   try {
-    connection.query(q, (err, result) => {
+    connection.query(q, (err, users) => {
       if (err) throw err;
-      res.send(result);
+      res.render("showuser", { users });
+      console.log(users);
     });
   } catch (err) {
     console.log(err);
-    res.send("Some error in DB");
+    res.render("Some error in DB");
   }
 });
 
-// connection.query(q, [data], (err, results) => {
-//   if (err) {
-//     console.error("Database Error:", err.message);
-//     connection.end();
-//     return;
-//   }
-
-//   console.log("Tables in my_app:", results);
-//   console.log(results);
-//   connection.end();
-// });
+app.get("/user/:id/edit", (req, res) => {
+  let { id } = req.params;
+  res.render("edit");
+});

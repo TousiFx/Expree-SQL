@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>All USERS</title>
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Table Container Styling */
+    table {
+      width: 100%;
+      max-width: 900px;
+      border-collapse: collapse;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Header Row Styling */
+    th {
+      background-color: #1e293b;
+      /* Dark slate blue */
+      color: #ffffff;
+      text-align: left;
+      padding: 16px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      border-bottom: 3px solid #38bdf8;
+      /* Accent light-blue underline */
+    }
+
+    /* Table Data Cells */
+    td {
+      padding: 14px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    /* Alternating Row Colors for Readability */
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+
+    /* Center-align the serial number column and form buttons */
+    td:first-child,
+    th:first-child,
+    td:last-child,
+    th:last-child {
+      text-align: center;
+      width: 80px;
+      /* Gives explicit width to smaller columns */
+    }
+
+    /* Edit Form Button Styling */
+    td form button {
+      background-color: #38bdf8;
+      /* Light blue accent color */
+      color: #1e293b;
+      border: none;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    /* Button Hover State */
+    td form button:hover {
+      background-color: #0ea5e9;
+      /* Slightly darker blue on hover */
+      color: #ffffff;
+      box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);
+    }
+
+    /* Button Active/Press State */
+    td form button:active {
+      transform: scale(0.97);
+    }
+
+    /* Hover Effect for Rows */
+    tr:hover td {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      transition: background-color 0.2s ease;
+    }
+
+    /* Responsive adjustments for mobile screens */
+    @media (max-width: 600px) {
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <tr>
+      <th>S.No.</th>
+      <th>ID</th>
+      <th>USER</th>
+      <th>EMAIL</th>
+    </tr>
+    <% users.forEach((user, index) => { %>
+    <tr>
+      <td><%= index + 1 %></td>
+      <td><%= user.id %></td>
+      <td><%= user.username %></td>
+      <td><%= user.email %></td>
+      <td>
+        <form method="get" action="user/<%=user.id%>/edit">
+          <button>Edit</button>
+        </form>
+      </td>
+    </tr>
+    <% }) %>
+  </table>
+</body>
+
+</html>
