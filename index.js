@@ -45,7 +45,16 @@ app.listen(port, () => {
 //USER ROUTE
 
 app.get("/user", (req, res) => {
-  res.send("this a user section");
+  let q = `SELECT * FROM user`;
+  try {
+    connection.query(q, (err, result) => {
+      if (err) throw err;
+      res.send(result);
+    });
+  } catch (err) {
+    console.log(err);
+    res.send("Some error in DB");
+  }
 });
 
 // connection.query(q, [data], (err, results) => {
