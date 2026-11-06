@@ -50,7 +50,6 @@ app.get("/user", (req, res) => {
     connection.query(q, (err, users) => {
       if (err) throw err;
       res.render("showuser", { users });
-      console.log(users);
     });
   } catch (err) {
     console.log(err);
