@@ -11,7 +11,7 @@
   <h1>Edit your page</h1>
   <h2>You are about edit this user: <%= user.email%></h2>
   <form method="post" action="/user/<%=user.id%>?_method=PATCH">
-    <textarea name="" <%=user.username%>></textarea>
+    <textarea <%=user.username%>><%=user.username%></textarea>
     <input type="password" name="password" placeholder="Password" />
     <button>Submit</button>
   </form>
