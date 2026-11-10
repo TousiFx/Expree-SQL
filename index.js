@@ -59,5 +59,15 @@ app.get("/user", (req, res) => {
 
 app.get("/user/:id/edit", (req, res) => {
   let { id } = req.params;
-  res.render("edit");
+  let q = "SELECT * FROM user WHERE id = ?";
+  try {
+    connection.query(q, [id], (err, result) => {
+      if (err) throw err;
+      let user = result[0];
+      res.render("edit", { user });
+    });
+  } catch (err) {
+    console.log(err);
+    res.send("Some error in DB");
+  }
 });
