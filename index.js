@@ -64,7 +64,7 @@ app.get("/user/:id/edit", (req, res) => {
   try {
     connection.query(q, [id], (err, result) => {
       if (err) throw err;
-      let user = result[0];
+      let user = result[0]; // Fixed: Get the first element of the array
       res.render("edit", { user });
     });
   } catch (err) {
@@ -81,7 +81,12 @@ app.patch("/user/:id", (req, res) => {
   try {
     connection.query(q, [id], (err, result) => {
       if (err) throw err;
-      let user = result[0];
+      let user = result[0]; // Fixed: Get the first element of the array
+
+      if (!user) {
+        return res.send("User not found");
+      }
+
       if (formPass != user.password) {
         return res.send("wrong password");
       } else {
