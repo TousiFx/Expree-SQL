@@ -3,6 +3,7 @@ const mysql = require("mysql2");
 const express = require("express");
 const app = express();
 const path = require("path");
+const methodOverride = require("method-override");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
@@ -38,9 +39,6 @@ app.get("/", (req, res) => {
     res.send("Some error in DB");
   }
 });
-app.listen(port, () => {
-  console.log("server is lestening to port 8080");
-});
 
 //USER ROUTE
 
@@ -56,6 +54,7 @@ app.get("/user", (req, res) => {
     res.render("Some error in DB");
   }
 });
+//USER EDIT
 
 app.get("/user/:id/edit", (req, res) => {
   let { id } = req.params;
@@ -70,4 +69,13 @@ app.get("/user/:id/edit", (req, res) => {
     console.log(err);
     res.send("Some error in DB");
   }
+});
+//USER UPDATE ROUTE
+
+app.get("/user/:id", (req, res) => {
+  res.send("updated");
+});
+
+app.listen(port, () => {
+  console.log("server is lestening to port 8080");
 });
